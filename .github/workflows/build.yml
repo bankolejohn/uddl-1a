@@ -13,7 +13,7 @@ jobs:
       - name: Cache Maven dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository  # Cache the local Maven repository for dependencies
+          path: ~/.m2/repository/.cache  # Cache the local Maven repository for dependencies
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}  # Key based on OS and POM hash
           restore-keys: |
             ${{ runner.os }}-maven-  # Fallback key if specific POM hash not found
@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: m2-cache
-          path: ~/.m2/repository
+          path: ~/.m2/repository/.cache
 
 
 
