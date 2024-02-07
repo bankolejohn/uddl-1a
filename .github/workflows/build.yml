@@ -45,6 +45,13 @@ jobs:
           echo "Artifact URL: ${ARTIFACT_URL}"
           echo "Artifact URL: ${ARTIFACT_URL}" > $GITHUB_WORKSPACE/jar-artifacts/artifact_url.txt
 
+    
+      - name: Archive .m2 directory
+        uses: actions/upload-artifact@v3
+        with:
+          name: m2-cache
+          path: ~/.m2/repository
+
 
 
 # name: Build and Publish Artifacts
