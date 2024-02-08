@@ -55,7 +55,7 @@ jobs:
       - name: list cache contents
         run: |
           echo "listing cache contents"
-          ls ~/.m2/repository/.cache
+          ls -R ~/.m2/repository/.cache
 
 
 
