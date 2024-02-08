@@ -52,6 +52,11 @@ jobs:
           name: m2-cache
           path: ~/.m2/repository/.cache
 
+      - name: list cache contents
+        run: |
+          echo "listing cache contents"
+          ls ~/.m2/repository/.cache
+
 
 
 # name: Build and Publish Artifacts
