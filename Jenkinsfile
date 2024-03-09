@@ -54,6 +54,41 @@
 // }
 
 
+// pipeline {
+//     agent any
+
+//     // Define stages for your build
+//     stages {
+//         // Checkout stage 1 (main project)
+//         stage('Checkout Stage 1') {
+//             steps {
+//                 // Use Git SCM plugin to checkout the first repository
+//                 git branch: 'main',
+//                     // credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
+//                     url: 'https://github.com/bankolejohn/uddl-1a.git'
+
+//                 // Build and install the project using Maven
+//                 // sh 'mvn clean install -Djava.version=17' // Set Java version to 17
+//                 sh 'mvn -t ${maven} clean install -Djava.version=17'
+//             }
+//         }
+
+//         // Checkout stage 2 (dependent project)
+//         stage('Checkout Stage 2') {
+//             steps {
+//                 // Use Git SCM plugin to checkout the second repository
+//                 git branch: 'main',
+//                     credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
+//                     url: 'https://github.com/bankolejohn/uddl-1b.git'
+
+//                 // Configure Maven to use the local repository from stage 1
+//                 sh 'mvn clean install -Djava.version=17 -Dsettings.local=./.m2/settings.xml'
+//             }
+//         }
+//     }
+// }
+
+
 pipeline {
     agent any
 
@@ -69,7 +104,10 @@ pipeline {
 
                 // Build and install the project using Maven
                 // sh 'mvn clean install -Djava.version=17' // Set Java version to 17
-                sh 'mvn -t ${maven} clean install -Djava.version=17'
+                script {
+                    // Use the 'bat' step for Windows, and 'sh' for Unix-like systems
+                    bat 'mvn clean install -Djava.version=17'
+                }
             }
         }
 
@@ -82,7 +120,10 @@ pipeline {
                     url: 'https://github.com/bankolejohn/uddl-1b.git'
 
                 // Configure Maven to use the local repository from stage 1
-                sh 'mvn clean install -Djava.version=17 -Dsettings.local=./.m2/settings.xml'
+                script {
+                    // Use the 'bat' step for Windows, and 'sh' for Unix-like systems
+                    bat 'mvn clean install -Djava.version=17 -Dsettings.local=./.m2/settings.xml'
+                }
             }
         }
     }
