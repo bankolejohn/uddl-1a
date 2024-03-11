@@ -69,7 +69,7 @@ pipeline {
 
                 // Build and install the project using Maven
                 // sh 'mvn clean install -Djava.version=17' // Set Java version to 17
-                sh 'mvn -t ${maven} clean install -Djava.version=17'
+                sh 'mvn -t ${Maven} clean install -Djava.version=17'
             }
         }
 
