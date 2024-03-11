@@ -54,39 +54,39 @@
 // }
 
 
-pipeline {
-    agent any
+// pipeline {
+//     agent any
 
-    // Define stages for your build
-    stages {
-        // Checkout stage 1 (main project)
-        stage('Checkout Stage 1') {
-            steps {
-                // Use Git SCM plugin to checkout the first repository
-                git branch: 'main',
-                    // credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
-                    url: 'https://github.com/bankolejohn/uddl-1a.git'
+//     // Define stages for your build
+//     stages {
+//         // Checkout stage 1 (main project)
+//         stage('Checkout Stage 1') {
+//             steps {
+//                 // Use Git SCM plugin to checkout the first repository
+//                 git branch: 'main',
+//                     // credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
+//                     url: 'https://github.com/bankolejohn/uddl-1a.git'
 
-                // Build and install the project using Maven
-                // sh 'mvn clean install -Djava.version=17' // Set Java version to 17
-                sh 'mvn -t ${Maven} clean install -Djava.version=17'
-            }
-        }
+//                 // Build and install the project using Maven
+//                 // sh 'mvn clean install -Djava.version=17' // Set Java version to 17
+//                 sh 'mvn -t ${Maven} clean install -Djava.version=17' 
+//             }
+//         }
 
-        // Checkout stage 2 (dependent project)
-        stage('Checkout Stage 2') {
-            steps {
-                // Use Git SCM plugin to checkout the second repository
-                git branch: 'main',
-                    credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
-                    url: 'https://github.com/bankolejohn/uddl-1b.git'
+//         // Checkout stage 2 (dependent project)
+//         stage('Checkout Stage 2') {
+//             steps {
+//                 // Use Git SCM plugin to checkout the second repository
+//                 git branch: 'main',
+//                     credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
+//                     url: 'https://github.com/bankolejohn/uddl-1b.git'
 
-                // Configure Maven to use the local repository from stage 1
-                sh 'mvn clean install -Djava.version=17 -Dsettings.local=./.m2/settings.xml'
-            }
-        }
-    }
-}
+//                 // Configure Maven to use the local repository from stage 1
+//                 sh 'mvn clean install -Djava.version=17 -Dsettings.local=./.m2/settings.xml'
+//             }
+//         }
+//     }
+// }
 
 
 // pipeline {
@@ -128,4 +128,44 @@ pipeline {
 //         }
 //     }
 // }
+
+pipeline {
+    agent any
+
+    // Define tools used in the pipeline
+    tools {
+        // Define Maven tool named 'Maven'
+        maven 'Maven'
+    }
+
+    // Define stages for your build
+    stages {
+        // Checkout stage 1 (main project)
+        stage('Checkout Stage 1') {
+            steps {
+                // Use Git SCM plugin to checkout the first repository
+                git branch: 'main',
+                    // credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
+                    url: 'https://github.com/bankolejohn/uddl-1a.git'
+
+                // Build and install the project using Maven
+                sh "${tool 'Maven'}/bin/mvn clean install -Djava.version=17"
+            }
+        }
+
+        // Checkout stage 2 (dependent project)
+        stage('Checkout Stage 2') {
+            steps {
+                // Use Git SCM plugin to checkout the second repository
+                git branch: 'main',
+                    credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
+                    url: 'https://github.com/bankolejohn/uddl-1b.git'
+
+                // Build and install the project using Maven
+                sh "${tool 'Maven'}/bin/mvn clean install -Djava.version=17"
+            }
+        }
+    }
+}
+
 
