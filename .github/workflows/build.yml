@@ -56,14 +56,19 @@ jobs:
         run: |
           echo "listing cache contents"
           ls -R ~/.m2/repository/.cache
+
       - name: Save build logs
         run: |
-          cat build.log > build_logs.txt  # Replace with your log file name
-        shell: bash
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build-logs
-          path: build_logs.txt
+          mkdir -p logs
+          tee logs/build_log.txt < "${GITHUB_WORKSPACE}/build.log
+      # - name: Save build logs
+      #   run: |
+      #     cat build.log > build_logs.txt  # Replace with your log file name
+      #   shell: bash
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: build-logs
+      #     path: build_logs.txt
 
 
 
