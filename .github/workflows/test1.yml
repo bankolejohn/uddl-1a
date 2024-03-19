@@ -1,0 +1,28 @@
+name: Build with .m2 Cache
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set Up JDK 17 Temurin
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: temurin
+        cache: maven  # Cache downloaded JDK if desired
+
+    - name: Build Code
+      run: mvn clean install
+
+    - name: Cache Maven Packages (Dynamic Path)
+      uses: actions/cache@v3
+      env:
+        LOCAL_MAVEN_REPO: C:/Users/HP/.m2  # Replace with your actual path
+      with:
+        path: ${{ env.LOCAL_MAVEN_REPO }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
