@@ -1,0 +1,46 @@
+name: Build and Publish Artifacts
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository/.cache  # Cache the local Maven repository for dependencies
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}  # Key based on OS and POM hash
+          restore-keys: |
+            ${{ runner.os }}-maven-  # Fallback key if specific POM hash not found
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven  # Reuse cached Maven installation
+
+      - name: Build and Collect JARs
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/jar-artifacts  # Create a directory to store JAR files
+          # Run Maven package in the root directory
+          mvn clean install
+          # Copy JAR files to the common folder
+          cp */target/*.jar $GITHUB_WORKSPACE/jar-artifacts/
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: all-jar-artifacts
+          path: jar-artifacts/
+
+      - name: Get Artifact Download URL
+        run: |
+          ARTIFACT_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts"
+          echo "Artifact URL: ${ARTIFACT_URL}"
+          echo "Artifact URL: ${ARTIFACT_URL}" > $GITHUB_WORKSPACE/jar-artifacts/artifact_url.txt
+    
+      
