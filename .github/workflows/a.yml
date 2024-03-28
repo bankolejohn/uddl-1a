@@ -48,8 +48,10 @@ jobs:
       - name: Push Artifacts to Artifactory
         run: |  # Multi-line command block
          jfrog rt u $GITHUB_WORKSPACE/jar-artifacts/ http://18.208.144.110:8082/artifactory/libs-snapshot/
+         jfrog rt u $GITHUB_WORKSPACE/jar-artifacts/ http://18.208.144.110:8082/artifactory/libs-snapshot/
         env:
-          JFROG_SERVER: http://18.208.144.110:8082  # Replace with your Artifactory URL
+          
+          JFROG_URL: http://18.208.144.110:8082  # Replace with your Artifactory URL
           JFROG_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY }}  # Reference your access token secret
 
       
