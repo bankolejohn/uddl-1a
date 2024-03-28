@@ -45,13 +45,22 @@ jobs:
       - name: JFrog CLI Setup
         uses: jfrog/setup-jfrog-cli@v4  # Replace X.Y.Z with the desired version
 
-      - name: Push Artifacts to Artifactory
-        run: |  # Multi-line command block
-         jfrog rt u $GITHUB_WORKSPACE/jar-artifacts/ http://18.208.144.110:8082/artifactory/libs-snapshot/
-         jfrog rt u $GITHUB_WORKSPACE/jar-artifacts/ http://18.208.144.110:8082/artifactory/libs-snapshot/
-        env:
-          
-          JFROG_URL: http://18.208.144.110:8082  # Replace with your Artifactory URL
-          JFROG_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY }}  # Reference your access token secret
 
-      
+
+      - name: Configure Artifactory
+        env:
+          JFROG_ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+          JFROG_ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USERNAME }}
+          JFROG_ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+        run: |
+         echo "JFROG_ARTIFACTORY_URL=$JFROG_ARTIFACTORY_URL" >> $GITHUB_ENV  # Optional: expose URL for reference
+
+      - name: Upload artifacts
+        run: |
+         jfrog rt upload \
+          --url=$JFROG_ARTIFACTORY_URL \
+          --user=$JFROG_ARTIFACTORY_USER \
+          --password=$JFROG_ARTIFACTORY_PASSWORD \
+          --artifactory=your-repo \
+          --path=build/output \
+          --files=artifacts/*.jar  # Adjust path and file pattern based on your artifacts
