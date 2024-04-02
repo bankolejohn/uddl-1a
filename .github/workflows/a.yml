@@ -61,6 +61,5 @@ jobs:
           --url=$JFROG_ARTIFACTORY_URL \
           --user=$JFROG_ARTIFACTORY_USER \
           --password=$JFROG_ARTIFACTORY_PASSWORD \
-          --artifactory=http://54.175.104.33:8082/artifactory/libs-snapshot/ \
           --path=build/output \
-          --files=artifacts/*.jar  # Adjust path and file pattern based on your artifacts
+          --files=jar-artifacts/*.jar  # Adjust path and file pattern based on your artifacts
