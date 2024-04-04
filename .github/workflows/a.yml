@@ -49,9 +49,9 @@ jobs:
 
       - name: Configure Artifactory
         env:
-          JFROG_ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-          JFROG_ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USERNAME }}
-          JFROG_ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USERNAME }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
           jf rt ping
       # - name: Upload artifacts
