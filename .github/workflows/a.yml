@@ -49,10 +49,11 @@ jobs:
 
       - name: Configure Artifactory
         env:
-          JF_URL: ${{ secrets.ARTIFACTORY_URL }}
-          JF_USER: ${{ secrets.ARTIFACTORY_USERNAME }}
-          JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
         run: |
+          jf -v
           jf rt ping
       # - name: Upload artifacts
       #   run: |
