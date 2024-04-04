@@ -53,13 +53,7 @@ jobs:
           JFROG_ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USERNAME }}
           JFROG_ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
-         echo "JFROG_ARTIFACTORY_URL=$JFROG_ARTIFACTORY_URL" >> $GITHUB_ENV  # Optional: expose URL for reference
-
-      - name: Upload artifacts
-        run: |
-         jfrog rt upload \
-          --url=$JFROG_ARTIFACTORY_URL \
-          --user=$JFROG_ARTIFACTORY_USER \
-          --password=$JFROG_ARTIFACTORY_PASSWORD \
-          --path=build/output \
-          --files=jar-artifacts/*.jar  # Adjust path and file pattern based on your artifacts
+          jf rt ping
+      # - name: Upload artifacts
+      #   run: |
+      #    jfrog rt upload 
