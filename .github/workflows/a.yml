@@ -45,6 +45,13 @@ jobs:
       - name: JFrog CLI Setup
         uses: jfrog/setup-jfrog-cli@v4  # Replace X.Y.Z with the desired version
 
+      - name: New version
+        run: | 
+          wget -qO - https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key | sudo apt-key add -
+          echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | sudo tee -a /etc/apt/sources.list &&    sudo apt update &&
+          sudo apt install -y jfrog-cli-v2-jf &&
+          jf intro
+
 
 
       - name: Configure Artifactory
