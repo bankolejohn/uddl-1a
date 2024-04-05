@@ -43,22 +43,12 @@ jobs:
           echo "Artifact URL: ${ARTIFACT_URL}"
           echo "Artifact URL: ${ARTIFACT_URL}" > $GITHUB_WORKSPACE/jar-artifacts/artifact_url.txt
       - name: JFrog CLI Setup
-        uses: jfrog/setup-jfrog-cli@v4  # Replace X.Y.Z with the desired version
-
-      - name: New version
-        run: | 
-          wget -qO - https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key | sudo apt-key add -
-          echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | sudo tee -a /etc/apt/sources.list &&    sudo apt update &&
-          sudo apt install -y jfrog-cli-v2-jf &&
-          jf intro
-
-
-
-      - name: Configure Artifactory
+        uses: jfrog/setup-jfrog-cli@v4  # Replace X.Y.Z with the desired version      
         env:
           JF_URL: ${{ secrets.JF_URL }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+      - name: test
         run: |
           jf -v
           jf rt ping
