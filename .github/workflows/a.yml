@@ -51,6 +51,7 @@ jobs:
         run: |
           jf -v
           jf rt ping
-      # - name: Upload artifacts
-      #   run: |
-      #    jfrog rt upload 
+
+      - name: list repo
+        run: jfrog rt repo-list --type maven
+
