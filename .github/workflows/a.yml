@@ -43,11 +43,10 @@ jobs:
           echo "Artifact URL: ${ARTIFACT_URL}"
           echo "Artifact URL: ${ARTIFACT_URL}" > $GITHUB_WORKSPACE/jar-artifacts/artifact_url.txt
       - name: JFrog CLI Setup
-        uses: jfrog/setup-jfrog-cli@v4  # Replace X.Y.Z with the desired version      
+        uses: jfrog/setup-jfrog-cli@v3
         env:
-          JF_URL: ${{ secrets.JF_URL }}
-          JF_USER: ${{ secrets.JF_USER }}
-          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+         JF_URL: ${{ secrets.ARTIFACTORY_URL }}
+         JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
       - name: test
         run: |
           jf -v
