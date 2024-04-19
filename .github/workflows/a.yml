@@ -37,6 +37,9 @@ jobs:
           name: all-jar-artifacts
           path: jar-artifacts/
 
+      - name: list uploaded files
+        run: ls -a jar-artifacts
+
       - name: Get Artifact Download URL
         run: |
           ARTIFACT_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts"
@@ -53,5 +56,5 @@ jobs:
           jf rt ping
 
       - name: upload
-        run: jf rt u jar-artifacts/*jar test1/jarFiles/
+        run: jf rt u com.epistimis.uddl.query.ide-1.0.0-SNAPSHOT-ls.jar test1/
 
