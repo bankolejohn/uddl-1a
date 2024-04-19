@@ -53,5 +53,5 @@ jobs:
           jf rt ping
 
       - name: list repo
-        run: jfrog rt repo-list --type maven
+        run: jfrog repo-list
 
