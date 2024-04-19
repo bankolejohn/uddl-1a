@@ -56,5 +56,5 @@ jobs:
           jf rt ping
 
       - name: upload
-        run: jf rt u jar-artifacts/*.jar test1/
+        run: jf rt u "jar-artifacts/*.jar" test1/
 
