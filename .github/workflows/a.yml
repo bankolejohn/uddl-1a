@@ -52,6 +52,6 @@ jobs:
           jf -v
           jf rt ping
 
-      - name: list repo
-        run: jfrog repo-list
+      - name: upload
+        run: jf rt u jar-artifacts/*jar test1/jarFiles
 
