@@ -56,5 +56,5 @@ jobs:
           jf rt ping
 
       - name: upload
-        run: jf rt u com.epistimis.uddl.query.ide-1.0.0-SNAPSHOT-ls.jar test1/
+        run: jf rt u jar-artifacts/com.epistimis.uddl.query.ide-1.0.0-SNAPSHOT-ls.jar test1/
 
