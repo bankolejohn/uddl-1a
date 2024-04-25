@@ -1,0 +1,32 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Maven
+        uses: actions/setup-maven@v1
+        with:
+          java-version: 17
+          maven-version: latest
+
+      - name: Build and install project 1
+        run: |
+          git checkout main
+          git pull origin main
+          mvn clean install -Djava.version=17
+        working-directory: ./uddl-1a
+
+      - name: Build and install project 2
+        run: |
+          git checkout main
+          git pull origin main
+          mvn clean install -Djava.version=17
+        working-directory: ./uddl-1b
