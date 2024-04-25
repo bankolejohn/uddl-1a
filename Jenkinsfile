@@ -165,6 +165,14 @@ pipeline {
                 sh "${tool 'Maven'}/bin/mvn clean install -Djava.version=17"
             }
         }
+
+        //checkout stage 3 (dependent project -face)
+        stage('Chekout Stage 3') {
+            steps {
+                git branch: 'main'
+                    url: https://github.com/bankolejohn/FACE
+
+                sh "${tool 'Maven'}/bin/mvn clean install -Djava.version=17"
     }
 }
 
