@@ -117,7 +117,7 @@
 //                 // Use Git SCM plugin to checkout the second repository
 //                 git branch: 'main',
 //                     credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
-//                     url: 'https://github.com/bankolejohn/uddl-1b.git'
+//                     url: 'https://github.com/bankolejohn/uddl-test.git'
 
 //                 // Configure Maven to use the local repository from stage 1
 //                 script {
@@ -159,7 +159,7 @@ pipeline {
                 // Use Git SCM plugin to checkout the second repository
                 git branch: 'main',
                     credentialsId: 'your_github_credentials_id', // Replace with your credentials ID
-                    url: 'https://github.com/bankolejohn/uddl-1b.git'
+                    url: 'https://github.com/bankolejohn/uddl-test.git'
 
                 // Build and install the project using Maven
                 sh "${tool 'Maven'}/bin/mvn clean install -Djava.version=17"
