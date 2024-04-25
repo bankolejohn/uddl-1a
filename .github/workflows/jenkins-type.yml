@@ -1,32 +1,31 @@
-name: Build and Deploy
+name: Build and Install uddl Projects
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest  # Runner environment (OS)
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          # Assuming you have a separate secret for your GitHub credentials named 'GITHUB_TOKEN'
+          credentials: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Maven
-        uses: actions/setup-maven@v1
+        uses: maven/maven-action@v3  # Action from GitHub Marketplace
         with:
-          java-version: 17
-          maven-version: latest
+          maven: '3.8.5'  # Specify desired Maven version (optional)
 
-      - name: Build and install project 1
-        run: |
-          git checkout main
-          git pull origin main
-          mvn clean install -Djava.version=17
-        working-directory: ./uddl-1a
+      - name: Checkout uddl-1a (Stage 1)
+        run: git clone https://github.com/bankolejohn/uddl-1a.git
 
-      - name: Build and install project 2
-        run: |
-          git checkout main
-          git pull origin main
-          mvn clean install -Djava.version=17
-        working-directory: ./uddl-1b
+      - name: Build and install uddl-1a
+        run: mvn clean install -Djava.version=17  # Leverage Maven action
+
+      - name: Checkout uddl-test (Stage 2)
+        run: git clone https://github.com/bankolejohn/uddl-test.git
+
+      - name: Build and install uddl-test
+        run: mvn clean install -Djava.version=17  # Leverage Maven action
