@@ -222,7 +222,7 @@ pipeline {
     stage('Checkout Stage 3 - FACE Project') { // Clearer stage name
       steps {
         git branch: 'main',
-             url: 'https://github.com/bankolejohn/FACE'
+             url: 'https://github.com/bankolejohn/face-new'
 
         // Build and install the project using Maven (assuming FACE uses Maven)
         sh "${tool 'Maven'}/bin/mvn clean install -Djava.version=17" // Verify if FACE uses Maven
