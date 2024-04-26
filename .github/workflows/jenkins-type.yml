@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest  # Runner environment (OS)
     steps:
       - uses: actions/checkout@v3
-        with:
-          # Assuming you have a separate secret for your GitHub credentials named 'GITHUB_TOKEN'
-          credentials: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   # Assuming you have a separate secret for your GitHub credentials named 'GITHUB_TOKEN'
+        #   credentials: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Set up Maven
       #   uses: maven/maven-action@v3  # Action from GitHub Marketplace
