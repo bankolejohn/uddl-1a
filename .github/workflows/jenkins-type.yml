@@ -25,14 +25,20 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Checkout uddl-1a (Stage 1)
+      - name: Checkout UDDL-Query (Stage 1)
         run: git clone https://github.com/bankolejohn/uddl-1a.git
 
-      - name: Build and install uddl-1a
+      - name: Build and install UDDL-Query
         run: mvn clean install -Djava.version=17  # Leverage Maven action
 
-      - name: Checkout uddl-test (Stage 2)
+      - name: Checkout UDDL (Stage 2)
         run: git clone https://github.com/bankolejohn/uddl-test.git
 
-      - name: Build and install uddl-test
+      - name: Build and install UDDL
         run: mvn clean install -Djava.version=17  # Leverage Maven action
+
+      - name: Checkout FACE (Stage 3)
+        run: git clone https://github.com/bankolejohn/face-new.git
+
+      - name: Build and install FACE
+        run: mvn clean install -Djava.version=17  # Leverage Maven action 
