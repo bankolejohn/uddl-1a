@@ -25,20 +25,36 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Checkout UDDL-Query (Stage 1)
-        run: git clone https://github.com/bankolejohn/uddl-1a.git
-
+      - name: Checkout tools repo
+        uses: actions/checkout@v4
+        with:
+          repository: bankolejohn/uddl-1a
+          
       - name: Build and install UDDL-Query
-        run: mvn clean install -Djava.version=17  # Leverage Maven action
+        run: mvn clean install -Djava.version=17  
 
-      - name: Checkout UDDL (Stage 2)
-        run: git clone https://github.com/bankolejohn/uddl-test.git
-
+      - name: Checkout tools repo
+        uses: actions/checkout@v4
+        with:
+          repository: bankolejohn/uddl-test
+          
       - name: Build and install UDDL
-        run: mvn clean install -Djava.version=17  # Leverage Maven action
+        run: mvn clean install -Djava.version=17  
 
-      - name: Checkout FACE (Stage 3)
-        run: git clone https://github.com/bankolejohn/face-new.git
+      # - name: Checkout UDDL-Query (Stage 1)
+      #   run: git clone https://github.com/bankolejohn/uddl-1a.git
 
-      - name: Build and install FACE
-        run: mvn clean install -Djava.version=17  # Leverage Maven action 
+      # - name: Build and install UDDL-Query
+      #   run: mvn clean install -Djava.version=17  # Leverage Maven action
+
+      # - name: Checkout UDDL (Stage 2)
+      #   run: git clone https://github.com/bankolejohn/uddl-test.git
+
+      # - name: Build and install UDDL
+      #   run: mvn clean install -Djava.version=17  # Leverage Maven action
+
+      # - name: Checkout FACE (Stage 3)
+      #   run: git clone https://github.com/bankolejohn/face-new.git
+
+      # - name: Build and install FACE
+      #   run: mvn clean install -Djava.version=17  # Leverage Maven action 
